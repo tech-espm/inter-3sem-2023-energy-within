@@ -1,7 +1,216 @@
-<h1>
-	Sobre
-</h1>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<p>
-	Sobre nós! 😊
-</p>
+	<style>
+		body {
+			background-image: url(/public/img/fundo_sobre.jpg);
+			max-width: 100%;
+		}
+
+		.titulo {
+			font-family: Arial, Helvetica, sans-serif;
+			text-align: center;
+			margin-top: 5rem;
+			font-size: 4rem;
+			animation: animacao-titulo 1s ease-out;
+		}
+
+		@keyframes animacao-titulo {
+			0% {
+				opacity: 0;
+				transform: translateY(-1.25rem);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.descricao {
+			margin-top: 5rem;
+			font-size: 1.1rem;
+			margin-bottom: 20rem;
+			text-align: center;
+			animation: animacao-titulo 1s ease-out;
+		}
+
+		.perfil {
+			max-width: 100%;
+			height: auto;
+			border-radius: 1rem;
+		}
+
+		.texto {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			border-radius: 1rem;
+			margin-top: 0.1rem;
+		}
+
+		.hide {
+			opacity: 0;
+			transition: opacity 3s;
+		}
+
+		.show {
+			opacity: 1;
+			transition: opacity 3s;
+		}
+
+		.scroll-trigger {
+			opacity: 0;
+			transition: opacity 3s;
+		}
+
+		.scroll-trigger.show {
+			opacity: 1;
+		}
+
+		.botao {
+			display: inline-flex;
+			width: 2rem;
+			height: 2rem;
+			border-radius: 1rem;
+		}
+
+		.linkedin {
+			background-image: url(/public/img/LinkedIn.png);
+			max-width: 100%;
+		}
+
+		.github {
+			background-color: white;
+			background-image: url(/public/img/github-mark.png);
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<h1 class="titulo">Sobre nós</h1>
+
+	<h3 class="descricao">
+		Nesta página temos uma breve apresentação de todos os integrantes desse grupo, além de uma história acadêmica de
+		cada um. Desça a página para começar
+	</h3>
+
+	<div class="container-fluid">
+
+		<div class="row">
+
+			<div class="col-sm-6 p-3">
+
+				<img src="/public/img/bruno.jpg" class="perfil scroll-trigger">
+
+			</div>
+
+			<div class="texto p-3 col-sm-6">
+
+				<div>
+					<h2 class="mb-3 scroll-trigger">Bruno Diegues Aly</h2>
+
+					<h4 class="mb-3 scroll-trigger">Idade: 24 anos</h4>
+
+					<p class="texto scroll-trigger">
+						Muito jovem sua família tomou a decisão de se mudar para a cidade de São Paulo, onde mora até os
+						dias de hoje. Sua vida acadêmica se deu início na Escola Móbile onde ficou até o 6º ano do
+						ensino fundamental. A partir do 7º ano estudou no Colégio Miguel de Cervantes até se formar.
+						Logo após sua formatura foi para a Espanha trabalhar em uma fábrica de cerejas durante as
+						férias, após sua volta deu início em seu primeiro curso na ESPM, Relações Internacionais. Depois
+						de se graduar, Bruno foi empregado pela empresa VALEMOBI, onde durante 6 meses foi treinado em
+						programação e desenvolvimento Front-End. Após a escolha de iniciar uma nova faculdade (Sistemas
+						de Informação na ESPM), o seu contrato com a VALEMOBI foi encerrado.
+					</p>
+
+					<p>
+
+						<a href="https://www.linkedin.com/in/brunoaly" target="_blank" rel="noopener noreferrer"
+							class="botao linkedin scroll-trigger">
+							<img src="/public/img/LinkedIn.png" alt="botao" />
+						</a>
+
+						<a href="https://www.github.com/brunoaly" target="_blank" rel="noopener noreferrer"
+							class="botao scroll-trigger github">
+							<img src="/public/img/github-mark.png" alt="botao" />
+						</a>
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-6 p-3">
+
+				<img src="/public/img/caldas.jpg" class="perfil scroll-trigger">
+
+			</div>
+
+			<div class="p-3 col-sm-6">
+
+				<div class="p-3">
+
+					<h2 class="mb-3 scroll-trigger">João Pedro Evangelista Caldas</h2>
+
+					<h4 class="mb-3 scroll-trigger">Idade: 21</h4>
+
+					<p class="mb-3 texto scroll-trigger">
+
+						Sua vida acadêmica deu início no Colégio Agostiniano Mendel, onde estudou durante todo o ensino
+						fundamental e médio. Após sua formatura, deu início a um curso preparatório para vestibulares na
+						instituição de ensino 'Anglo', onde ficou durante um ano. Após esse período, João Pedro prestou
+						para Psicologia na UFMG, onde foi aprovado em primeira lista e logo deu início à sua graduação.
+						Durante o 1º ano de curso, João se apaixonou pela tecnologia e decidiu trancar o curso. Após um
+						semestre esperando, João prestou o vestibular da ESPM e foi aprovado, ganhando 60% de bolsa
+						devido à sua excelência acadêmica.
+
+					</p>
+
+					<p>
+
+						<a href="https://www.linkedin.com/in/jo%C3%A3o-caldas-2258a5231/" target="_blank"
+							rel="noopener noreferrer" class="botao linkedin scroll-trigger">
+							<img src="/public/img/LinkedIn.png" alt="botao" />
+						</a>
+
+						<a href="https://www.github.com/joaopedrocaldas" target="_blank" rel="noopener noreferrer"
+							class="botao scroll-trigger github">
+							<img src="/public/img/github-mark.png" alt="botao" />
+						</a>
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<script>
+		window.addEventListener('scroll', function () {
+			let elementos = document.querySelectorAll('.scroll-trigger')
+			for (let i = 0; i < elementos.length; i++) {
+				let elemento = elementos[i]
+				let posicaoTopo = elemento.getBoundingClientRect().top
+				let alturaJanela = window.innerHeight
+
+				if (posicaoTopo < alturaJanela * 0.8 && window.scrollY > 0) {
+					elemento.classList.add('show')
+				} else {
+					elemento.classList.remove('show')
+				}
+			}
+		})
+
+	</script>
+</body>
+
+</html>
