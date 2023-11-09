@@ -1,4 +1,5 @@
 ﻿import app = require("teem");
+import Consumo = require("../models/consumo");
 
 class IndexRoute {
 	public async index(req: app.Request, res: app.Response) {
@@ -51,6 +52,11 @@ class IndexRoute {
 	}
 
 	public async obterDados(req: app.Request, res: app.Response) {
+
+		let dataInicio = req.query['dataInicio'] as string;
+		let dataFinal = req.query['dataFinal'] as string;
+
+
 		let dados = [
 			{ dia: "10/09", valor: 80 },
 			{ dia: "11/09", valor: 92 },
@@ -64,7 +70,7 @@ class IndexRoute {
 			{ dia: "19/09", valor: 110 }
 		];
 
-		res.json(dados);
+		res.send(Consumo.listarMediaPorData(dataInicio, dataFinal));
 	}
 }
 

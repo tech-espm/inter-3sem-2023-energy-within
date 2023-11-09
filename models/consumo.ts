@@ -3,20 +3,33 @@ import app = require("teem");
 interface Consumo {
     id_consumo: number;
     id_eletrodomestico: number;
-    data: string;
+    dia: string;
     consumo: number;
     nome_eletrodomestico: string;
 }
 
 class Consumo {
-    public static async listarConsumos() {
+    public static async listarMediaPorData(dataInicio: string, dataFinal: string): Promise<Consumo[]> {
         let lista: Consumo[] = [];
+        dataInicio += ' 00:00:00';
+        dataFinal += ' 23:59:59';
+        let parametros = [dataInicio, dataFinal];
         await app.sql.connect(async (sql: app.Sql) => {
             lista = await sql.query(`
-            select c.consumo, e.nome_eletrodomestico
-                FROM consumo c inner join eletrodomestico e
-                on c.id_eletrodomestico = e.id_eletrodomestico
-                GROUP BY c.id_eletrodomestico`)
+                SELECT
+                c.id_eletrodomestico,
+                e.nome_eletrodomestico,
+                avg(c.consumo) consumo,
+                date(data) dia
+                FROM consumo c
+                INNER JOIN eletrodomestico e ON e.id_eletrodomestico = c.id_eletrodomestico
+                WHERE c.data between ? and ?
+                group by c.id_eletrodomestico, e.nome_eletrodomestico, dia
+            `, parametros)
         });
+
+        return lista;
     }
 }
+
+export = Consumo;

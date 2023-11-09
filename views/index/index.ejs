@@ -65,7 +65,7 @@
 
 		try {
 
-			let response = await fetch("/obterDados");
+			let response = await fetch("/obterDados?dataInicio=" + $("#dataInicial").val() + '&dataFinal=' + $('#dataFinal').val());
 
 			if (response.ok) {
 
@@ -84,7 +84,7 @@
 
 				for (let i = 0; i < dados.length; i++) {
 					labels.push(dados[i].dia);
-					data.push(dados[i].valor);
+					data.push(dados[i].consumo);
 				}
 
 				let grafico = new Chart(document.getElementById("grafico-barras"), {
