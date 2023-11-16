@@ -20,11 +20,13 @@ class Consumo {
                 c.id_eletrodomestico,
                 e.nome_eletrodomestico,
                 avg(c.consumo) consumo,
-                date(data) dia
+                date(data) dt,
+                date_format(data, '%d/%m') dia
                 FROM consumo c
                 INNER JOIN eletrodomestico e ON e.id_eletrodomestico = c.id_eletrodomestico
                 WHERE c.data between ? and ?
-                group by c.id_eletrodomestico, e.nome_eletrodomestico, dia
+                group by c.id_eletrodomestico, e.nome_eletrodomestico, dt, dia
+                ORDER BY dt
             `, parametros)
         });
 

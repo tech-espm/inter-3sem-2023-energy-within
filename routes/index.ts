@@ -56,21 +56,7 @@ class IndexRoute {
 		let dataInicio = req.query['dataInicio'] as string;
 		let dataFinal = req.query['dataFinal'] as string;
 
-
-		let dados = [
-			{ dia: "10/09", valor: 80 },
-			{ dia: "11/09", valor: 92 },
-			{ dia: "12/09", valor: 90 },
-			{ dia: "13/09", valor: 101 },
-			{ dia: "14/09", valor: 105 },
-			{ dia: "15/09", valor: 100 },
-			{ dia: "16/09", valor: 64 },
-			{ dia: "17/09", valor: 78 },
-			{ dia: "18/09", valor: 93 },
-			{ dia: "19/09", valor: 110 }
-		];
-
-		res.send(Consumo.listarMediaPorData(dataInicio, dataFinal));
+		res.json(await Consumo.listarMediaPorData(dataInicio, dataFinal));
 	}
 }
 
