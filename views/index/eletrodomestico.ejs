@@ -5,14 +5,37 @@
 	</h1>
 	
 	<div class="row">
-		<div class="col-sm-4 pb-4">
+		<div class="col-sm-12 pb-4">
 
 			<div class="card shadow">
 				<div class="card-body">
 					<form id="form">
-						<div class="form-group">
-							<label for="data">Data</label>
-							<input id="data" name="data" class="form-control" type="date" value="<%= ano %>-<%= mes %>-<%= dia %>" />
+
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="dataInicial">Data Inicial</label>
+									<input id="dataInicial" name="dataInicial" class="form-control" type="date" value="<%= anoInicial %>-<%= mesInicial %>-<%= diaInicial %>" />
+								</div>
+							</div>
+
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="dataFinal">Data Final</label>
+									<input id="dataFinal" name="dataFinal" class="form-control" type="date" value="<%= anoFinal %>-<%= mesFinal %>-<%= diaFinal %>" />
+								</div>
+							</div>
+
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="id_eletrodomestico">Data Final</label>
+									<select id="id_eletrodomestico" name="id_eletrodomestico" class="form-control">
+										<% for (let i = 0; i < eletrodomesticos.length; i++) { %>
+											<option value="<%= eletrodomesticos[i].id_eletrodomestico %>"><%= eletrodomesticos[i].nome_eletrodomestico %></option>
+										<% } %>
+									</select>
+								</div>
+							</div>
 						</div>
 
 						<button type="submit" class="btn btn-primary">Listar</button>
@@ -24,7 +47,11 @@
 	</div>
 
 	<div class="card shadow mb-4">
-		<div class="card-body" id="div-grafico"></div>
+		<div class="card-body" id="div-grafico">
+			<div class="text-center">
+				Preencha os campos e clique em Listar para analisar o consumo.
+			</div>
+		</div>
 	</div>
 
 </div>
@@ -39,7 +66,13 @@
 
 	$("#form").validate({
 		rules: {
-			data: {
+			dataInicial: {
+				required: true
+			},
+			dataFinal: {
+				required: true
+			},
+			id_eletrodomestico: {
 				required: true
 			}
 		},
@@ -53,7 +86,7 @@
 
 		try {
 
-			let response = await fetch("/obterDados");
+			let response = await fetch("/api/consumo/listarMediaPorData?dataInicial=" + $("#dataInicial").val() + '&dataFinal=' + $('#dataFinal').val() + '&id_eletrodomestico=' + $('#id_eletrodomestico').val());
 
 			if (response.ok) {
 
@@ -72,7 +105,7 @@
 
 				for (let i = 0; i < dados.length; i++) {
 					labels.push(dados[i].dia);
-					data.push(dados[i].valor);
+					data.push(dados[i].consumo);
 				}
 
 				let grafico = new Chart(document.getElementById("grafico-barras"), {
@@ -80,7 +113,7 @@
 					data: {
 						labels: labels,
 						datasets: [{
-							label: "Valor",
+							label: "Consumo Médio por Hora (kW)",
 							backgroundColor: "#4e73df",
 							hoverBackgroundColor: "#2e59d9",
 							borderColor: "#4e73df",
@@ -153,6 +186,6 @@
 		}
 	}
 
-	atualizarDados();
+	//atualizarDados();
 
 </script>
