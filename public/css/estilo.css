@@ -2,7 +2,8 @@ img {
 	max-width: 100%;
 }
 
-html, body {
+html,
+body {
 	/* Para fazer o rodapé ficar sempre na parte inferior da página ;) */
 	min-height: 100vh;
 }
@@ -16,6 +17,7 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
+
 }
 
 .conteudo {
@@ -29,7 +31,46 @@ html, body {
 	padding: 2rem;
 }
 
-.link-rodape, .link-rodape:hover {
+.link-rodape,
+.link-rodape:hover {
 	color: white;
 	text-decoration: none;
+}
+
+.wallpaper {
+	background: url(/public/img/03.jpg);
+	min-height: 70vh;
+	box-sizing: border-box;
+	max-width: 100%;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	box-shadow: 10px 5px 5px grey;
+
+
+}
+
+
+.wallpaperTexto {
+	padding: 4rem;
+
+	color: whitesmoke;
+
+
+}
+
+.wallpaperTexto h1 {
+	margin-bottom: 1px;
+	font-size: 60px;
+}
+
+.wallpaperTexto p {
+	text-align: center;
+}
+
+.navbar {
+	box-shadow: 5px 5px 5px grey;
+	max-width: 100%;
 }
