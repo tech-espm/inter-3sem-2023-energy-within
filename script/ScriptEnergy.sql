@@ -43,6 +43,8 @@ group by c.id_eletrodomestico, dia, hora;
 SELECT
 c.id_eletrodomestico,
 sum(c.consumo) consumo
+date(data) dia,
+extract(HOUR from data) hora
 FROM consumo c
 WHERE c.data between '2023-10-24 00:00:00' and '2023-10-24 23:59:59'
 group by c.id_eletrodomestico

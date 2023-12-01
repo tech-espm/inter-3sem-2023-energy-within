@@ -79,6 +79,29 @@ class Consumo {
         return lista;
     }
 
+    public static async listarTop5(dataInicial: string, dataFinal: string): Promise<Consumo[]> {
+        let lista: Consumo[] = [];
+        dataInicial += ' 00:00:00';
+        dataFinal += ' 23:59:59';
+        let parametros = [dataInicial, dataFinal];
+        await app.sql.connect(async (sql: app.Sql) => {
+            lista = await sql.query(`
+                SELECT
+                c.id_eletrodomestico,
+                e.nome_eletrodomestico nome,
+                sum(c.consumo) consumo
+                FROM consumo c
+                INNER JOIN eletrodomestico e ON e.id_eletrodomestico = c.id_eletrodomestico
+                WHERE c.data between ? and ?
+                group by c.id_eletrodomestico
+                order by consumo desc
+                limit 5;
+            `, parametros)
+        });
+
+        return lista;
+    }
+
     public static async logarConsumo(id_eletrodomestico: number, consumo: number): Promise<void> {
         let parametros = [id_eletrodomestico || 0, consumo || 0];
         await app.sql.connect(async (sql: app.Sql) => {

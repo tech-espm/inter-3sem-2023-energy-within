@@ -54,6 +54,27 @@ class IndexRoute {
 		res.render("index/eletrodomestico", opcoes);
 	}
 
+	public async top5(req: app.Request, res: app.Response) {
+		var dataAtual = new Date();
+
+		// Obtendo os componentes da data
+		var dia = dataAtual.getDate();
+		var mes = dataAtual.getMonth() + 1; // Lembre-se que os meses são zero-indexed
+		var ano = dataAtual.getFullYear();
+
+		let dataInicial = ano + '-' + mes + '-' + (dia - 30)
+		let dataFinal = ano + '-' + mes + '-' + dia
+
+		let opcoes = {
+			dataInicial: dataInicial,
+			dataFinal: dataFinal,
+
+			consumos: await Consumo.listarTop5(dataInicial, dataFinal)
+		}
+
+		res.render("index/top5", opcoes)
+	}
+
 	public async sobre(req: app.Request, res: app.Response) {
 		let opcoes = {
 			titulo: "Sobre"
