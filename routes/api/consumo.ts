@@ -26,8 +26,8 @@ class ConsumoApiRoute {
 
     @app.http.post()
     public async logarConsumo(req: app.Request, res: app.Response) {
-        let id_eletrodomestico = parseInt(req.query['id_eletrodomestico'] as string);
-        let consumo = parseFloat(req.query['consumo'] as string);
+        let id_eletrodomestico = parseInt(req.body.id_eletrodomestico as string);
+        let consumo = parseFloat(req.body.consumo as string);
 
         await Consumo.logarConsumo(id_eletrodomestico, consumo);
 

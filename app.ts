@@ -3,6 +3,8 @@
 require("dotenv").config({ encoding: "utf8", path: app.currentDirectoryName() + "/../.env" });
 
 app.run({
+	localIp: process.env.localIp,
+	port: parseInt(process.env.port as string),
 	// Configurações de acesso ao banco de dados.
 	// Mais informações: https://www.npmjs.com/package/mysql2#using-connection-pools
 	sqlConfig: {

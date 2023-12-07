@@ -103,9 +103,58 @@ class Consumo {
     }
 
     public static async logarConsumo(id_eletrodomestico: number, consumo: number): Promise<void> {
-        let parametros = [id_eletrodomestico || 0, consumo || 0];
         await app.sql.connect(async (sql: app.Sql) => {
-            await sql.query("INSERT INTO consumo (id_eletrodomestico, data, consumo) VALUES (?, now(), ?)", parametros)
+            const lista: any[] = await sql.query("SELECT extract(DAY from data) dia, extract(MONTH from data) mes, extract(YEAR from data) ano, extract(HOUR from data) hora FROM consumo WHERE id_eletrodomestico = ? ORDER BY id_consumo DESC LIMIT 1", [id_eletrodomestico]);
+
+            let ano: number, mes: number, dia: number, hora: number;
+
+            if (!lista || !lista.length) {
+                const agora = new Date();
+                ano = agora.getFullYear();
+                mes = agora.getMonth() + 1;
+                dia = agora.getDate();
+                hora = agora.getHours();
+            } else {
+                ano = lista[0].ano;
+                mes = lista[0].mes;
+                dia = lista[0].dia;
+                hora = lista[0].hora;
+            }
+
+            hora++;
+            if (hora > 23) {
+                hora = 0;
+                dia++;
+
+                let diaLimite = 31;
+                switch (mes) {
+                    case 2:
+                        if (!(ano % 4) && ((ano % 100) || !(ano % 400))) {
+                            diaLimite = 29;
+                        } else {
+                            diaLimite = 28;
+                        }
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        diaLimite = 30;
+                        break;
+                }
+
+                if (dia > diaLimite) {
+                    dia = 1;
+                    mes++;
+
+                    if (mes > 12) {
+                        mes = 1;
+                        ano++;
+                    }
+                }
+            }
+
+            await sql.query("INSERT INTO consumo (id_eletrodomestico, data, consumo) VALUES (?, ?, ?)", [id_eletrodomestico || 0, `${ano}-${mes}-${dia} ${hora}:00:00`, (consumo || 0) / 10]);
         });
     }
 }
