@@ -35,7 +35,6 @@
     let dados = <%= JSON.stringify(consumos) %>;
 	if (!dados || !dados.length) {
 		Swal.fire("Erro", "Sem dados no último mês!", "error");
-		return;
     }
 	
 	for (let i = 0; i < dados.length; i++) {

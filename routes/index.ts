@@ -62,7 +62,8 @@ class IndexRoute {
 		var mes = dataAtual.getMonth() + 1; // Lembre-se que os meses são zero-indexed
 		var ano = dataAtual.getFullYear();
 
-		let dataInicial = ano + '-' + mes + '-' + (dia - 30)
+
+		let dataInicial = ano + '-' + (mes == 1 ? 12 : mes - 1) + '-' + dia
 		let dataFinal = ano + '-' + mes + '-' + dia
 
 		let opcoes = {
